@@ -1,51 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: app-deployment
-namespace: cmunoz
-labels:
-app: app
+  name: app-deployment
+  namespace: cmunoz
+  labels:
+    app: app
 spec:
-replicas: 1
-strategy:
-type: Recreate
-minReadySeconds: 20
-selector:
-matchLabels:
-app: app
-template:
-metadata:
-labels:
-app: app
-spec:
-containers:
- - envFrom:
- - secretRef:
-name: db-secret
-name: app-deployment
-image: harbor.dev.afsmtddso.com/devopsbootcamplab02/lab-env-repo:10
-ports:
-containerPort: 5000
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  replicas: 1
+  strategy:
+    type: Recreate
+  minReadySeconds: 20
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: db-secret
+        name: app-deployment
+        image:  harbor.dev.afsmtddso.com/devopsbootcamplab02/app:34e5860-dcbc818 
+        ports:
+        - containerPort: 5000
 
 
 
